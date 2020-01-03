@@ -21,6 +21,11 @@ db.on('error', (err) => {
 // Routes
 app.use('/auth', require('./routes/auth'));
 app.use('/billpay', require('./routes/billpay'));
+app.use(express.static(__dirname + '/client/build'));
+
+app.get('*', function(req, res) {
+	res.sendFile(__dirname + '/client/build/index.html');
+});
 
 app.listen(process.env.PORT, () => {
     console.log('server runningon port: ', process.env.PORT)
